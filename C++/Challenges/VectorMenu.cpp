@@ -115,8 +115,8 @@ int main() {
             // Find smallest number
             case 's':
             case 'S': {
-                int small {list.at(0)};
                 if (list.size() != 0) {
+                    int small {list.at(0)};
                     for (unsigned int i {0}; i < list.size(); i++) {
                         if (small > list.at(i)) {
                             small = list.at(i);
@@ -131,8 +131,8 @@ int main() {
             // Find largest number
             case 'l':
             case 'L': {
-                int large {list.at(0)};
                 if (list.size() != 0) {
+                    int large {list.at(0)};
                     for (unsigned int i {0}; i < list.size(); i++) {
                         if (large < list.at(i)) {
                             large = list.at(i);
