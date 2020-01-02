@@ -66,6 +66,9 @@ int main() {
         cout << "M - Display the mean of the numbers" << endl;
         cout << "S - Display the smallest number" << endl;
         cout << "L - Display the largest number" << endl;
+        cout << "F - Find a number in the list and display how many times it appears" << endl;
+        cout << "C - Clear out the list" << endl;
+        cout << "R - Remove a number from the list" << endl;
         cout << "Q - Quit" << endl;
         cout << "\nEnter your choice: ";
         cin >> selection;
@@ -84,15 +87,24 @@ int main() {
                     cout << "[] - list is empty" << endl;
                 }
                 break;
-            // Add number to list
+            // Add number to list - No duplicate entries allowed
             case 'a':
             case 'A': {
                 int num {};
                 cout << "Enter the number you'd like to add: ";
                 cin >> num;
-                list.push_back(num);
-                cout << endl;
-                cout << num << " added." << endl;
+                bool exists {false};
+                for (unsigned int i {0}; i < list.size(); i++) {
+                    if (list.at(i) == num) {
+                        exists = true;
+                    }
+                }
+                if (!exists) {
+                    list.push_back(num);
+                    cout << num << " added." << endl;
+                } else {
+                    cout << "Sorry, no duplicate entries allowed." << endl;
+                }
                 break;
             }
             // Find average
@@ -141,6 +153,57 @@ int main() {
                     cout << "The largest number is: " << large << endl;
                 } else {
                     cout << "Unable to determine the largest number - list is empty" << endl;
+                }
+                break;
+            }
+            // Search for number
+            case 'f':
+            case 'F': {
+                int count {};
+                int target {};
+                cout << "Enter the number you wish to find: ";
+                cin >> target;
+                for (auto num : list) {
+                    if (num == target) {
+                        count++;
+                    }
+                }
+                if (count != 0) {
+                    cout << "The number " << target << " appears " << count << " times in the list." << endl;
+                }
+                else {
+                    cout << "The number " << target << " is not in the list." << endl;
+                }
+                break;
+            }
+            // Clear out the list
+            case 'c':
+            case 'C':
+                //clearing out the list (make it empty again) (Hint: the vector class has a .clear() method)
+                if (list.size() != 0) {
+                    list.clear();
+                    cout << "The list has been cleared." << endl;
+                }
+                else {
+                    cout << "The list is already empty." << endl;
+                }
+                break;
+            // Remove element from list
+            case 'r':
+            case 'R': {
+                int target {};
+                bool exists {false};
+                cout << "Enter the number you wish to delete: ";
+                cin >> target;
+                for (int i {0}; i < list.size(); i++) {
+                    if (list.at(i) == target) {
+                        list.erase(list.begin() + i);
+                        exists = true;
+                        cout << target << " was deleted." << endl;
+                    }
+                }
+                if (!exists) {
+                    cout << target << " was not in the list." << endl;
                 }
                 break;
             }
