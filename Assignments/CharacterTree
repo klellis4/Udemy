@@ -1,0 +1,59 @@
+/*
+ * Write a C++ program that displays a Letter Pyramid from a user-provided string.
+ * Prompt the user to enter a string and then from that string display a letter pyramid as follows:
+ * 
+ * If the user enters the string "ABC", then your program should display:
+ * 
+ *      A
+ *     ABA
+ *    ABCBA
+ * 
+ * If the user enters the string "12345" then your program should display:
+ * 
+ *          1
+ *         121
+ *        12321
+ *       1234321
+ *      123454321
+ */
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    
+    string message {};
+    cout << "Enter a string: ";
+    getline(cin, message);
+    
+    int letters = message.length();
+    int position {0};
+    
+    for (size_t i {0}; i < message.length(); i++) {
+        // Print spaces before letters to create "tree" formation
+        for (int spaces = letters - position; spaces > 0; spaces--) {
+            cout << " ";
+        }
+        
+        // Print charactesr before current character
+        for (int j = 0; j < position; j++) {
+            cout << message.at(j);
+        }
+        
+        // Print current character
+        cout << message.at(i);
+        
+        // Print characters after current character
+        for (int j = (position - 1); j >= 0; j--) {
+            cout << message.at(j);
+        }
+        
+        // Wrap to new line and increase position in input string
+        cout << endl;
+        position++;
+    }
+    cout << endl;
+    return 0;
+}
